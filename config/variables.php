@@ -1,9 +1,9 @@
 <?php
 // Variables
 return [
-  "creatorName" => "ThemeSelection",
-  "creatorUrl" => "https://themeselection.com",
-  "templateName" => "Materio",
+  "creatorName" => "Sadia Islam Zerin",
+  "creatorUrl" => "",
+  "templateName" => "Zeden",
   "templateSuffix" => "Bootstrap Dashboard FREE",
   "templateVersion" => "2.0.0",
   "templateFree" => true,

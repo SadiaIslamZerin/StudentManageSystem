@@ -15,7 +15,7 @@
                 <div class="card p-7">
                     <!-- Logo -->
                     <div class="app-brand justify-content-center mt-5">
-                        <a href="{{ url('/') }}" class="app-brand-link gap-3">
+                        <a href="{{ url('/login') }}" class="app-brand-link gap-3">
                             <span class="app-brand-logo demo">@include('_partials.macros', ['height' => 20, 'withbg' => 'fill: #fff;'])</span>
                             <span
                                 class="app-brand-text demo text-heading fw-semibold">{{ config('variables.templateName') }}</span>
@@ -65,7 +65,7 @@
 
                         <p class="text-center mb-5">
                             <span>Don't have account?</span>
-                            <a href="{{ url('auth/register-basic') }}">
+                            <a href="{{ url('/register') }}">
                                 <span>Create an account</span>
                             </a>
                         </p>

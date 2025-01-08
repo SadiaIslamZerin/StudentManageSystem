@@ -46,7 +46,8 @@ use App\Http\Controllers\authentications\LoginBasic;
 
 
 // Main Page Route
-Route::get('/', [LoginBasic::class, 'index'])->name('Zeden - Login');
+Route::get('/login', [LoginBasic::class, 'index'])->name('Zeden - Login');
+Route::get('/register', [RegisterBasic::class, 'index'])->name('auth-register-basic');
 Route::get('/Home', [Analytics::class, 'index'])->name('dashboard-analytics');
 
 
@@ -66,7 +67,6 @@ Route::get('/pages/misc-under-maintenance', [MiscUnderMaintenance::class, 'index
 
 // authentication
 Route::get('/auth/login-basic', [LoginBasic::class, 'index'])->name('auth-login-basic');
-Route::get('/auth/register-basic', [RegisterBasic::class, 'index'])->name('auth-register-basic');
 Route::get('/auth/forgot-password-basic', [ForgotPasswordBasic::class, 'index'])->name('auth-reset-password-basic');
 
 // cards

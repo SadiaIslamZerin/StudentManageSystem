@@ -280,49 +280,10 @@
       ]
     },
     {
-      "url": "https://demos.themeselection.com/materio-bootstrap-html-laravel-admin-template/demo-1/form/validation",
-      "icon": "menu-icon tf-icons ri-checkbox-multiple-line",
-      "name": "Form Validation",
-      "slug": "form-validation",
-      "target": "_blank",
-      "badge": [
-        "label-primary fs-tiny",
-        "Pro"
-      ]
-    },
-    {
       "url": "tables/basic",
       "icon": "menu-icon tf-icons ri-table-alt-line",
       "name": "Tables",
       "slug": "tables-basic"
-    },
-    {
-      "url": "https://demos.themeselection.com/materio-bootstrap-html-laravel-admin-template/demo-1/tables/datatables-basic",
-      "icon": "menu-icon tf-icons ri-grid-line",
-      "name": "Datatables",
-      "slug": "tables-datatables",
-      "target": "_blank",
-      "badge": [
-        "label-primary fs-tiny",
-        "Pro"
-      ]
-    },
-    {
-      "menuHeader": "Misc"
-    },
-    {
-      "url": "https://github.com/themeselection/materio-bootstrap-html-laravel-admin-template-free/issues",
-      "icon": "menu-icon tf-icons ri-lifebuoy-line",
-      "name": "Support",
-      "slug": "support",
-      "target": "_blank"
-    },
-    {
-      "url": "https://themeselection.com/demo/materio-bootstrap-html-admin-template/documentation/laravel-introduction.html",
-      "icon": "menu-icon tf-icons ri-article-line",
-      "name": "Documentation",
-      "slug": "documentation",
-      "target": "_blank"
     }
   ]
 }

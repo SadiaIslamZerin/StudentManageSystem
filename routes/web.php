@@ -48,6 +48,10 @@ use App\Http\Controllers\authentications\LoginBasic;
 // Main Page Route
 Route::get('/login', [LoginBasic::class, 'index'])->name('Zeden - Login');
 Route::get('/register', [RegisterBasic::class, 'index'])->name('auth-register-basic');
+Route::post('/store_user_register', [RegisterBasic::class, 'store'])->name('user-register');
+Route::post('/login_Validation', [LoginBasic::class, 'loginValidation'])->name('login-validation');
+
+
 Route::get('/Home', [Analytics::class, 'index'])->name('dashboard-analytics');
 
 

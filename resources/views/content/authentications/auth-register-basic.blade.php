@@ -27,8 +27,9 @@
                         <h4 class="mb-1">Adventure starts here 🚀</h4>
                         <p class="mb-5">Make your management easy and fun!</p>
 
-                        <form id="formAuthentication" class="mb-5" action="{{ url('/login') }}" method="{POST}"
-                            onsubmit="return validateForm()">
+                        <form id="formAuthentication" class="mb-5" action="{{ url('/store_user_register') }}"
+                            onsubmit="validateForm(event)">
+                            @csrf
                             <div class="form-floating form-floating-outline mb-5">
                                 <input type="text" class="form-control" id="username" name="username" required
                                     placeholder="Enter your name" autofocus>
@@ -57,11 +58,11 @@
                                     </div>
                                     <span class="input-group-text cursor-pointer"><i
                                             class="ri-eye-off-line ri-20px"></i></span>
-                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span id="passwordError"
-                                            class="font-medium text-sm text-red-600 dark:text-red-500"
-                                            style="color: red;font-size: 1rem;"></span>
-                                    </p>
                                 </div>
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span id="passwordError"
+                                        class="font-medium text-sm text-red-600 dark:text-red-500"
+                                        style="color: red;font-size: 1rem;"></span>
+                                </p>
                             </div>
                             <button class="btn btn-primary d-grid w-100 mb-5">
                                 Sign up
@@ -87,7 +88,8 @@
         </div>
     </div>
     <script>
-        function validateForm() {
+        async function validateForm(event) {
+            event.preventDefault();
             const username = document.getElementById('username').value;
             const usernameError = document.getElementById('usernameError');
             const email = document.getElementById('email').value;
@@ -98,10 +100,13 @@
             const nameRegex = /^[a-zA-Z. ]+$/;
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,12}$/;
-            const phoneRegex = /^(8801[3-9]\d{8}|(\+8801[3-9]\d{8}))$/;
+            const phoneRegex = /^(01[3-9]\d{8})$/;
             usernameError.textContent = '';
             emailError.textContent = '';
             passwordError.textContent = '';
+
+            const form = document.getElementById('formAuthentication');
+            const formData = new FormData(form);
 
             let flag = 1;
 
@@ -115,15 +120,47 @@
             }
             if (!passwordRegex.test(password)) {
                 passwordError.textContent =
-                    "❗Password must be between 5 to 12 characters and contain at least one letter and one digit.";
+                    "❗Password must be 5-12 character and contain at least one letter and one digit.";
                 flag = 0;
             }
 
-            if (flag == 0) {
-                return false
+            if (flag == 1) {
+                usernameError.textContent = '';
+                emailError.textContent = '';
+                passwordError.textContent = '';
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                        }
+                    });
+
+                    const data = await response.json();
+
+                    if (data.status === 'success') {
+                        alert('Your account has been created successfully');
+                        window.location.href = "{{ url('/login') }}";
+                    } else {
+                        if (data.errors.username) {
+                            document.getElementById('usernameError').textContent = data.errors.username;
+                        }
+                        if (data.errors.email) {
+                            document.getElementById('emailError').textContent = data.errors.email;
+                        }
+                        if (data.errors.password) {
+                            document.getElementById('passwordError').textContent = data.errors.password;
+                        }
+                    }
+
+                } catch (error) {
+                    console.error('Error:', error);
+                }
             }
 
-            return true;
+            return false;
         }
     </script>
 @endsection

@@ -15,7 +15,7 @@
                 <div class="card p-7">
                     <!-- Logo -->
                     <div class="app-brand justify-content-center mt-5">
-                        <a href="{{ url('/') }}" class="app-brand-link gap-3">
+                        <a href="{{ url('/login') }}" class="app-brand-link gap-3">
                             <span class="app-brand-logo demo">@include('_partials.macros', ['height' => 20, 'withbg' => 'fill: #fff;'])</span>
                             <span
                                 class="app-brand-text demo text-heading fw-semibold">{{ config('variables.templateName') }}</span>
@@ -27,11 +27,17 @@
                         <h4 class="mb-1">Welcome to {{ config('variables.templateName') }}! 👋🏻</h4>
                         <p class="mb-5">Please sign-in to your account</p><br>
 
-                        <form id="formAuthentication" class="mb-5" action="{{ url('/') }}" method="GET">
+                        <form id="formAuthentication" class="mb-5" action="{{ url('/login_Validation') }}" method="POST"
+                            onsubmit="loginvalidateform(event)">
+                            @csrf
                             <div class="form-floating form-floating-outline mb-5">
                                 <input type="text" class="form-control" id="email" name="email-username"
-                                    placeholder="Enter your email or username" autofocus>
-                                <label for="email">Email or Username</label>
+                                    placeholder="Enter your email or username" autofocus required>
+                                <label for="email">Email or Phone no</label>
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span id="emailError"
+                                        class="font-medium text-sm text-red-600 dark:text-red-500"
+                                        style="color: red;"></span>
+                                </p>
                             </div>
                             <div class="mb-5">
                                 <div class="form-password-toggle">
@@ -39,21 +45,19 @@
                                         <div class="form-floating form-floating-outline">
                                             <input type="password" id="password" class="form-control" name="password"
                                                 placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                                aria-describedby="password" />
+                                                aria-describedby="password" required>
                                             <label for="password">Password</label>
                                         </div>
                                         <span class="input-group-text cursor-pointer"><i
                                                 class="ri-eye-off-line ri-20px"></i></span>
                                     </div>
+                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span id="passwordError"
+                                            class="font-medium text-sm text-red-600 dark:text-red-500"
+                                            style="color: red;"></span>
+                                    </p>
                                 </div>
                             </div>
-                            <div class="mb-5 pb-2 d-flex justify-content-between pt-2 align-items-center">
-                                <div class="form-check mb-0">
-                                    <input class="form-check-input" type="checkbox" id="remember-me">
-                                    <label class="form-check-label" for="remember-me">
-                                        Remember Me
-                                    </label>
-                                </div>
+                            <div class="mb-5 pb-2 d-right justify-content-between pt-2 align-items-center">
                                 <a href="{{ url('auth/forgot-password-basic') }}" class="float-end mb-1">
                                     <span>Forgot Password?</span>
                                 </a>
@@ -65,7 +69,7 @@
 
                         <p class="text-center mb-5">
                             <span>Don't have account?</span>
-                            <a href="{{ url('auth/register-basic') }}">
+                            <a href="{{ url('/register') }}">
                                 <span>Create an account</span>
                             </a>
                         </p>
@@ -81,4 +85,73 @@
             </div>
         </div>
     </div>
+    <script>
+        async function loginvalidateform(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+
+            let flag = 1;
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,12}$/;
+            const phoneRegex = /^(01[3-9]\d{8})$/;
+
+            emailError.textContent = '';
+            passwordError.textContent = '';
+
+            const form = document.getElementById('formAuthentication');
+            const formData = new FormData(form);
+
+            if (!emailRegex.test(email) && !phoneRegex.test(email)) {
+                emailError.textContent = "❗Invalid email or phone no.";
+                flag = 0;
+            }
+            if (!passwordRegex.test(password)) {
+                passwordError.textContent = "❗Invalid password.";
+                flag = 0;
+            }
+
+            if (flag == 1) {
+                emailError.textContent = '';
+                passwordError.textContent = '';
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                        }
+                    });
+
+                    const data = await response.json();
+
+                    if (data.status === 'success') {
+                        window.location.href = "{{ url('/Home') }}";
+                    } else {
+                        if (data.errors) {
+                            // Show validation errors
+                            if (data.errors['email-username']) {
+                                emailError.textContent = data.errors['email-username'][0];
+                            }
+                            if (data.errors.password) {
+                                passwordError.textContent = data.errors.password[0];
+                            }
+                        } else {
+                            passwordError.textContent = data.message;
+                        }
+                    }
+                } catch (error) {
+                    alert('An error occurred. Please try again later.');
+                    console.error('Error:', error);
+                }
+
+            }
+            return false;
+        }
+    </script>
 @endsection

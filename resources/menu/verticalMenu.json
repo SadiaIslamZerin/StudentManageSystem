@@ -1,7 +1,7 @@
 {
   "menu": [
     {
-      "url": "/",
+      "url": "/Home",
       "name": "Dashboards",
       "icon": "menu-icon tf-icons ri-home-smile-line",
       "slug": "dashboard"
@@ -90,21 +90,19 @@
       ]
     },
     {
-      "name": "Misc",
+      "name": "Student Manage",
       "icon": "menu-icon tf-icons ri-instance-line",
-      "slug": "pages-misc",
+      "slug": "pages-student",
       "submenu": [
         {
-          "url": "pages/misc-error",
-          "name": "Error",
-          "slug": "pages-misc-error",
-          "target": "_blank"
+          "url": "manage/add-student",
+          "name": "Add Student",
+          "slug": "pages-add-student"
         },
         {
-          "url": "pages/misc-under-maintenance",
-          "name": "Under Maintenance",
-          "slug": "pages-misc-under-maintenance",
-          "target": "_blank"
+          "url": "/manage/all_student_page",
+          "name": "Student List",
+          "slug": "pages-all-student"
         }
       ]
     },
@@ -280,49 +278,10 @@
       ]
     },
     {
-      "url": "https://demos.themeselection.com/materio-bootstrap-html-laravel-admin-template/demo-1/form/validation",
-      "icon": "menu-icon tf-icons ri-checkbox-multiple-line",
-      "name": "Form Validation",
-      "slug": "form-validation",
-      "target": "_blank",
-      "badge": [
-        "label-primary fs-tiny",
-        "Pro"
-      ]
-    },
-    {
       "url": "tables/basic",
       "icon": "menu-icon tf-icons ri-table-alt-line",
       "name": "Tables",
       "slug": "tables-basic"
-    },
-    {
-      "url": "https://demos.themeselection.com/materio-bootstrap-html-laravel-admin-template/demo-1/tables/datatables-basic",
-      "icon": "menu-icon tf-icons ri-grid-line",
-      "name": "Datatables",
-      "slug": "tables-datatables",
-      "target": "_blank",
-      "badge": [
-        "label-primary fs-tiny",
-        "Pro"
-      ]
-    },
-    {
-      "menuHeader": "Misc"
-    },
-    {
-      "url": "https://github.com/themeselection/materio-bootstrap-html-laravel-admin-template-free/issues",
-      "icon": "menu-icon tf-icons ri-lifebuoy-line",
-      "name": "Support",
-      "slug": "support",
-      "target": "_blank"
-    },
-    {
-      "url": "https://themeselection.com/demo/materio-bootstrap-html-admin-template/documentation/laravel-introduction.html",
-      "icon": "menu-icon tf-icons ri-article-line",
-      "name": "Documentation",
-      "slug": "documentation",
-      "target": "_blank"
     }
   ]
 }

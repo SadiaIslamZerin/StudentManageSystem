@@ -9,6 +9,7 @@ class Analytics extends Controller
 {
   public function index()
   {
-    return view('content.dashboard.dashboards-analytics');
+    return response(view('content.dashboard.dashboards-analytics'))
+      ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
   }
 }

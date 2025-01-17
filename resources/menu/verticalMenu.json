@@ -1,7 +1,7 @@
 {
   "menu": [
     {
-      "url": "/",
+      "url": "/Home",
       "name": "Dashboards",
       "icon": "menu-icon tf-icons ri-home-smile-line",
       "slug": "dashboard"
@@ -90,21 +90,19 @@
       ]
     },
     {
-      "name": "Misc",
+      "name": "Student Manage",
       "icon": "menu-icon tf-icons ri-instance-line",
-      "slug": "pages-misc",
+      "slug": "pages-student",
       "submenu": [
         {
-          "url": "pages/misc-error",
-          "name": "Error",
-          "slug": "pages-misc-error",
-          "target": "_blank"
+          "url": "manage/add-student",
+          "name": "Add Student",
+          "slug": "pages-add-student"
         },
         {
-          "url": "pages/misc-under-maintenance",
-          "name": "Under Maintenance",
-          "slug": "pages-misc-under-maintenance",
-          "target": "_blank"
+          "url": "/manage/all_student_page",
+          "name": "Student List",
+          "slug": "pages-all-student"
         }
       ]
     },

@@ -156,7 +156,7 @@
                     }
 
                 } catch (error) {
-                    console.error('Error:', error);
+                    document.getElementById('passwordError').textContent = error;
                 }
             }
 

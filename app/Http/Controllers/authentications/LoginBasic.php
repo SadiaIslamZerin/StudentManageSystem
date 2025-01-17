@@ -7,12 +7,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Config;
+
 
 class LoginBasic extends Controller
 {
   public function index()
   {
-    return view('content.authentications.auth-login-basic');
+    return response(view('content.authentications.auth-login-basic'))
+      ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
   }
   public function loginValidation(Request $request)
   {
@@ -57,6 +61,15 @@ class LoginBasic extends Controller
       ], 401);
     }
 
+    Config::set('session.lifetime', 60);
+
+    Session::put('user_logged_in', true);
+    Session::put('user_id', $user->id);
+    Session::put('userName', $user->name);
+    Session::put('userRole', $user->user_role);
+
+
+
     // Successful authentication
     return response()->json([
       'status' => 'success',
@@ -67,5 +80,13 @@ class LoginBasic extends Controller
         'role' => $user->user_role
       ]
     ], 200);
+  }
+  public function logout()
+  {
+    // Clear the session
+    Session::flush();
+
+    // Redirect to login page
+    return redirect('/login')->with('message', 'You have been logged out successfully.');
   }
 }

@@ -43,6 +43,7 @@ use App\Http\Controllers\tables\Basic as TablesBasic;
 use App\Http\Controllers\authentications\LoginBasic;
 use App\Http\Middleware\CheckSession;
 use App\Http\Controllers\manage\studentmanage;
+use App\Http\Controllers\manage\coursemanage;
 
 
 // Main Page Route
@@ -56,10 +57,23 @@ Route::middleware(CheckSession::class)->group(function () {
     Route::get('/Home', [Analytics::class, 'index'])->name('dashboard-analytics');
 
     Route::get('/logout', [LoginBasic::class, 'logout'])->name('logout');
-    Route::get('/manage/add-student', [studentmanage::class, 'add_student_page'])->name('add-student');
-    Route::post('/manage/store_student', [studentmanage::class, 'store_student'])->name('store-student');
-    Route::get('/manage/all_student_page', [studentmanage::class, 'all_student_page'])->name('all-student');
-    Route::get('/manage/studentlist', [studentmanage::class, 'getstudents'])->name('all-student');
+    Route::get('/manage/add-student', [studentmanage::class, 'add_student_page'])->name('pages-student-add-student');
+    Route::post('/manage/store_student', [studentmanage::class, 'store_student'])->name('pages-student-store-student');
+    Route::get('/manage/all_student_page', [studentmanage::class, 'all_student_page'])->name('pages-student-all-student');
+    Route::get('/manage/studentlist', [studentmanage::class, 'getstudents'])->name('pages-student-all-student');
+    Route::get('/manage/student/{id}', [studentmanage::class, 'getStudent'])->name('student-get');
+
+
+    Route::get('/manage/create-course', [coursemanage::class, 'add_course_page'])->name('pages-course-add-course');
+    Route::post('/manage/store-course', [coursemanage::class, 'store_course'])->name('pages-course-store_course');
+    Route::get('/manage/all_courses_page', [coursemanage::class, 'all_course_page'])->name('pages-course-all-course');
+    Route::get('/manage/courselist', [coursemanage::class, 'getCourses'])->name('pages-course-all_course_page_retrive');
+    Route::delete('/manage/courses/{id}', [coursemanage::class, 'deleteCourse'])->name('pages-course-course-delete');
+    Route::post('/manage/course/enroll', [coursemanage::class, 'enrollStudentInCourse'])->name('pages-course-stuedent-enroll');
+    Route::get('/course/{courseId}/students', [coursemanage::class, 'getStudentsForCourse'])->name('pages-course-stuedents-list');
+
+
+
     // layout
     Route::get('/layouts/without-menu', [WithoutMenu::class, 'index'])->name('layouts-without-menu');
     Route::get('/layouts/without-navbar', [WithoutNavbar::class, 'index'])->name('layouts-without-navbar');

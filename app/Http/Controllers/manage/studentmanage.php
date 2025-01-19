@@ -80,4 +80,17 @@ class studentmanage extends Controller
         $students = DB::table('students')->paginate(20);
         return response()->json($students);
     }
+
+    public function getStudent($id)
+    {
+        $student = DB::table('students')
+            ->where('id', $id)
+            ->first();
+
+        if ($student) {
+            return response()->json($student);
+        } else {
+            return response()->json(['error' => 'Student not found'], 404);
+        }
+    }
 }

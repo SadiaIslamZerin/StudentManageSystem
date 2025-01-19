@@ -67,7 +67,7 @@
                             </div>
                         </div>
                         <p class="mt-2 text-sm text-red-600"><span id="genderError" style="color: red;"></span></p>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" onclick="enrollStudent()">Submit</button>
                     </form>
                 </div>
             </div>

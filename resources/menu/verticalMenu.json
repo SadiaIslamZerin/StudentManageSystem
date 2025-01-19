@@ -4,43 +4,10 @@
       "url": "/Home",
       "name": "Dashboards",
       "icon": "menu-icon tf-icons ri-home-smile-line",
-      "slug": "dashboard"
+      "slug": "dashboard-analytics"
     },
     {
-      "name": "Layouts",
-      "icon": "menu-icon tf-icons ri-layout-2-line",
-      "slug": "layouts",
-      "submenu": [
-        {
-          "url": "layouts/without-menu",
-          "name": "Without menu",
-          "slug": "layouts-without-menu"
-        },
-        {
-          "url": "layouts/without-navbar",
-          "name": "Without navbar",
-          "slug": "layouts-without-navbar"
-        },
-        {
-          "url": "layouts/container",
-          "name": "Container",
-          "slug": "layouts-container"
-        },
-        {
-          "url": "layouts/fluid",
-          "name": "Fluid",
-          "slug": "layouts-fluid"
-        },
-        {
-          "url": "layouts/blank",
-          "name": "Blank",
-          "slug": "layouts-blank",
-          "target": "_blank"
-        }
-      ]
-    },
-    {
-      "menuHeader": "Apps & Pages"
+      "menuHeader": "Manage"
     },
     {
       "name": "Account Settings",
@@ -95,14 +62,31 @@
       "slug": "pages-student",
       "submenu": [
         {
-          "url": "manage/add-student",
+          "url": "/manage/add-student",
           "name": "Add Student",
-          "slug": "pages-add-student"
+          "slug": "pages-student-add-student"
         },
         {
           "url": "/manage/all_student_page",
           "name": "Student List",
-          "slug": "pages-all-student"
+          "slug": "pages-student-all-student"
+        }
+      ]
+    },
+    {
+      "name": "Course Manage",
+      "icon": "menu-icon tf-icons ri-instance-line",
+      "slug": "pages-course",
+      "submenu": [
+        {
+          "url": "/manage/create-course",
+          "name": "Add Course",
+          "slug": "pages-course-add-course"
+        },
+        {
+          "url": "/manage/all_courses_page",
+          "name": "Course List",
+          "slug": "pages-course-all-course"
         }
       ]
     },
